@@ -1,0 +1,45 @@
+﻿@model WMSUCPECS.Areas.Security.Models.UserView
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+
+
+    <dl class="dl-horizontal">
+        <div class="panel panel-default panel-right">
+            <div class="panel-heading">
+                <div class="panel-header-text"><h4><b>Delete this record?</b></h4></div>
+                <div class="panel-button text-right">
+                    <a href="@Url.Action("Index")" class="btn btn-default">
+                        <span class="glyphicon glyphicon-arrow-left"></span>
+                        Cancel
+                    </a>
+                    <button type="submit" value="Delete" class="btn btn-danger" />
+                    <span class="glyphicon glyphicon-trash"></span>
+                    Delete
+                </div>
+            </div>
+            <div class="panel-body">
+                <img src="@Url.Content("~/images/unknown.png")" class="img-rounded resize" />
+
+                <p class="text">
+                    <b>
+                        @Html.DisplayFor(model => model.LastName)
+                    </b>
+                </p>
+                @Html.DisplayFor(model => model.FirstName)
+                <br /> <br />
+                @Html.DisplayFor(model => model.Age) Years Old
+                <br />
+                @Html.DisplayFor(model => model.Gender)
+            </div>
+        </div>
+    </dl>
+
+}

@@ -1,0 +1,67 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+header.content-header {
+    border-bottom: 1px solid #dddddd;
+    margin-bottom: 16px;
+}
+.content-action {
+    margin-top:10px;
+    padding-top:8px;
+
+}
+.text-spacing {
+    padding-right: 25px;
+
+}
+
+a.red {
+    color:#dd0000;
+}
+.radio-margin {
+    margin-top: 5px;
+}
+.panel-margin {
+    margin-right: 750px;
+}
+.panel-center {
+    margin-left: 350px;
+    margin-right: 350px;
+}
+.panel-header-text {
+    float: left;
+    display: block;
+ 
+}
+.panel.button {
+    display: inline;
+    float:right;
+
+}
+.resize {
+    width: 170px;
+    height: 170px;
+    float:left;
+    margin-right: 15px; 
+}
+tr:nth-child(even) {background-color: #f2f2f2}
+th {
+    background-color: #4CAF50;
+    color: white;
+}
+
+tr:nth-column(2n+1) {color: blue}

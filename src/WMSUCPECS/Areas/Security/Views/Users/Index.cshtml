@@ -1,0 +1,89 @@
+﻿@model IEnumerable<WMSUCPECS.Areas.Security.Models.UserView>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+@{
+    if (TempData["message"] != null)
+    {
+        <div class=" alert alert-success"> <strong> Successfully created!</strong> </div>
+    }
+}
+@{
+    if (TempData["editmsg"] != null)
+    {
+        <div class=" alert alert-success"> <strong> Successfully modified!</strong> </div>
+    }
+}
+
+@{
+    if (TempData["delmsg"] != null)
+    {
+        <div class=" alert alert-success"> <strong> Successfully deleted!</strong> </div>
+    }
+}
+
+<p>
+    <div class="text-right">
+
+        <a href="@Url.Action("Create")" class="btn btn-info">
+            <span class="glyphicon glyphicon-plus"></span>Create New
+        </a>
+    </div>
+</p>
+<div style="overflow-x:auto;">
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Age)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Gender)
+            </th>
+            <th>Actions</th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Age)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Gender)
+                </td>
+                <td>
+                    <a href="@Url.Action("Edit", new { id=item.Id })"
+                       class="text-success">
+                        <span class="glyphicon glyphicon-pencil"></span>Edit
+                    </a>
+                    <a href="@Url.Action("Details", new { id = item.Id })"
+                       class="text-success">
+                        <span class="glyphicon glyphicon-cloud"></span>Details
+                    </a>
+                    <a href="@Url.Action("Delete", new { id = item.Id })"
+                       class="text-danger">
+                        <span class="glyphicon glyphicon-trash"></span>Delete
+                    </a>
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
