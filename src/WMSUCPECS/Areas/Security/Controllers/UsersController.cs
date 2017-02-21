@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using WMSUCPECS.Areas.Security.Models;
@@ -118,25 +119,32 @@ namespace WMSUCPECS.Areas.Security.Controllers
         // GET: Security/Users/Edit/5
         public ActionResult Edit(Guid id)
         {
-            var u = Users.FirstOrDefault(users => users.Id == id);
-            return View(u);
+             return View(GetUser);
+            
         }
 
         // POST: Security/Users/Edit/5
         [HttpPost]
         public ActionResult Edit(Guid id, UserView usermodel)
         {
+          
             try
             {
                 if (ModelState.IsValid == false)
                     return View();
+                using (var db = new DatabaseContext())
+                {
+                  var user = db.Users.FirstOrDefault(u => u.Id == id);
+                    
+                    user.FirstName = usermodel.FirstName;
+                    user.LastName = usermodel.LastName;
+                    user.Age = usermodel.Age;
+                    user.Gender = usermodel.Gender;
+
+                    db.SaveChanges();
+                }
                 
-                var u = Users.FirstOrDefault(user => user.Id == id);
-               
-                u.FirstName = usermodel.FirstName;
-                u.LastName = usermodel.LastName;
-                u.Age = usermodel.Age;
-                u.Gender = usermodel.Gender;
+
 
                 TempData["editmsg"] = "Successfully modified!";
              
