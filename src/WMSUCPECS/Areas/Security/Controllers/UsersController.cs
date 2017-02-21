@@ -62,9 +62,8 @@ namespace WMSUCPECS.Areas.Security.Controllers
         // GET: Security/Users/Details/5
         public ActionResult Details(Guid id)
 {
-            var u = Users.FirstOrDefault(users => users.Id == id);
-           // Users.Contains(u);
-            return View(u);
+            return View(GetUser(id));
+            
         }
          
         // GET: Security/Users/Create
@@ -119,7 +118,7 @@ namespace WMSUCPECS.Areas.Security.Controllers
         // GET: Security/Users/Edit/5
         public ActionResult Edit(Guid id)
         {
-             return View(GetUser);
+             return View(GetUser(id));
             
         }
 
@@ -159,9 +158,7 @@ namespace WMSUCPECS.Areas.Security.Controllers
         // GET: Security/Users/Delete/5
         public ActionResult Delete(Guid id)
         {
-            var u = Users.FirstOrDefault(users => users.Id == id);
-
-            return View(u);
+           return View(GetUser(id));
         }
 
         // POST: Security/Users/Delete/5
@@ -170,15 +167,37 @@ namespace WMSUCPECS.Areas.Security.Controllers
         {
             try
             {
-                var u = Users.FirstOrDefault(user => user.Id == id);
-                Users.Remove(u);
-                TempData["delmsg"] = "Successfully deleted!";
-                return RedirectToAction("Index");
+                 using (var db = new DatabaseContext())
+                {
+                    var user = db.Users.FirstOrDefault(u => u.Id == id);
+                    db.Users.Remove(user);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
             }
             catch
             {
                 return View();
             }
+        }
+		private UserView GetUser(Guid id)
+        {
+            using (var db = new DatabaseContext())
+            {
+                return (from user in db.Users
+                        where user.Id == id
+                        select new UserView
+                        {
+                            Id = user.Id,
+                            FirstName = user.FirstName,
+                            LastName = user.LastName,
+                            Age = user.Age,
+                            Gender = user.Gender
+                        }).FirstOrDefault();
+
+                
+            }
+
         }
     }
 }
