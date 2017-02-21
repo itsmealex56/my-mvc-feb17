@@ -25,22 +25,16 @@
                     Delete
                 </div>
             </div>
-            <div class="panel-body">
-                <img src="@Url.Content("~/images/unknown.png")" class="img-rounded resize" />
-
-                <p class="text">
-                    <b>
-                        @Html.DisplayFor(model => model.LastName)
-                    </b>
-                </p>
-                @Html.DisplayFor(model => model.FirstName)
-                <br /> <br />
-                @Html.DisplayFor(model => model.Age) Years Old
-                <br />
-                @Html.DisplayFor(model => model.Gender)
-                <br />
-                @Html.DisplayFor(model => model.EmploymentDate)
+            <div class="card">
+                <img src="@Url.Content("~/images/unknown.png")" alt="Avatar" style="width:20%" >
+                <div class="container">
+                    <h4><b>@Html.DisplayFor(model => model.FirstName)</b> <b> @Html.DisplayFor(model => model.LastName) </b></h4>
+                    <p>@Html.DisplayFor(model => model.Age) Years Old</p>
+                    <p>@Html.DisplayFor(model => model.Gender)</p>
+                    
+                </div>
             </div>
+          
         </div>
     </dl>
 

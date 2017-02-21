@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
-using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using WMSUCPECS.Areas.Security.Models;
 using WMSUCPECS.Dal;
@@ -26,7 +24,8 @@ namespace WMSUCPECS.Areas.Security.Controllers
                                  LastName = user.LastName,
                                  Age = user.Age,
                                  Gender = user.Gender,
-                                 EmploymentDate = user.EmploymentDate 
+                                 EmploymentDate = user.EmploymentDate,
+                                 Schools = user.Educations.Select(s => s.School).ToList()
                              }).ToList();
 
                 return View(users);
@@ -44,18 +43,7 @@ namespace WMSUCPECS.Areas.Security.Controllers
         // GET: Security/Users/Create
         public ActionResult Create()
         {
-            ViewBag.Gender = new List<SelectListItem> {
-                new SelectListItem
-                {
-                    Value = "Male",
-                    Text = "Male"
-                },
-                new SelectListItem
-                {
-                    Value = "Female",
-                    Text = " Female" 
-                }
-            };
+           
             return View();
         }
 
@@ -67,6 +55,7 @@ namespace WMSUCPECS.Areas.Security.Controllers
             {
                 if (ModelState.IsValid == false)
                     return View();
+
                 using (var db = new DatabaseContext())
                 {
                     var sql = @"exec uspCreateUser @guid,
@@ -102,11 +91,11 @@ namespace WMSUCPECS.Areas.Security.Controllers
                         db.SaveChanges();
                     }*/
                     if (result > 1)
-                    {
-                        TempData["message"] = "Successfully created!";
+                    
+                        //TempData["message"] = "Successfully created!";
 
                         return RedirectToAction("Index");
-                    }
+                    
                     else
                         return View();
                 }

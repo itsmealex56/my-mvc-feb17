@@ -29,7 +29,7 @@ namespace WMSUCPECS.Areas.Security.Models
         public DateTime? EmploymentDate { get; set; }
 
 
-
+        public IList<string> Schools { get; set; }
 
     }
 
