@@ -24,7 +24,8 @@ namespace WMSUCPECS.Areas.Security.Controllers
                                  FirstName = user.FirstName,
                                  LastName = user.LastName,
                                  Age = user.Age,
-                                 Gender = user.Gender
+                                 Gender = user.Gender,
+                                 EmploymentDate = user.EmploymentDate 
                              }).ToList();
 
                 return View(users);
@@ -73,7 +74,8 @@ namespace WMSUCPECS.Areas.Security.Controllers
                         FirstName = usermodel.FirstName,
                         LastName = usermodel.LastName,
                         Age = usermodel.Age,
-                        Gender = usermodel.Gender
+                        Gender = usermodel.Gender,
+                        EmploymentDate = usermodel.EmploymentDate 
 
                     });
                     db.SaveChanges();
@@ -112,7 +114,7 @@ namespace WMSUCPECS.Areas.Security.Controllers
                     user.LastName = usermodel.LastName;
                     user.Age = usermodel.Age;
                     user.Gender = usermodel.Gender;
-
+                    user.EmploymentDate = usermodel.EmploymentDate; 
                     db.SaveChanges();
                 }
 
@@ -165,7 +167,8 @@ namespace WMSUCPECS.Areas.Security.Controllers
                             FirstName = user.FirstName,
                             LastName = user.LastName,
                             Age = user.Age,
-                            Gender = user.Gender
+                            Gender = user.Gender,
+                            EmploymentDate = user.EmploymentDate 
                         }).FirstOrDefault();
 
 

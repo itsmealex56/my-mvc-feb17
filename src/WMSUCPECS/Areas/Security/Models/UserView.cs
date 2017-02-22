@@ -25,6 +25,9 @@ namespace WMSUCPECS.Areas.Security.Models
 
         public String Gender { get; set; }
 
+        [Display(Name = "Employment Date")]
+        public DateTime? EmploymentDate { get; set; }
+
 
 
 
