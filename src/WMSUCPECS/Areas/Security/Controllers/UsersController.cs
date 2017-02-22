@@ -91,11 +91,11 @@ namespace WMSUCPECS.Areas.Security.Controllers
                         db.SaveChanges();
                     }*/
                     if (result > 1)
-                    
-                        //TempData["message"] = "Successfully created!";
+                    {
+                        TempData["message"] = "Successfully created!";
 
                         return RedirectToAction("Index");
-                    
+                    }
                     else
                         return View();
                 }
