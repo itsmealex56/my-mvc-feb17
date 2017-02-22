@@ -11,61 +11,34 @@ namespace WMSUCPECS.Areas.Security.Controllers
 {
     public class UsersController : Controller
     {
-        private IList<UserView> Users
-        {
-            get
-            {
-                if (Session["data"] == null)
-                {
-                    Session["data"] = new List<UserView>() {
-                        new UserView {
-                            Id = Guid.NewGuid(),
-                            FirstName = "ALexander Kim",
-                            LastName = "Waing",
-                            Age = 20 ,
-                            Gender =  "Male"
-                        },
-                    new UserView {
-                        Id = Guid.NewGuid(),
-                        FirstName = "Ysabel",
-                        LastName = "Ortega",
-                        Age = 18 ,
-                        Gender = "Female"
-
-                       }
-                    };
-                }
-                return Session["data"] as List<UserView>;
-                
-            }
-        }
+        
         // GET: Security/Users
         public ActionResult Index()
         {
-            using(var db = new DatabaseContext())
+            using (var db = new DatabaseContext())
             {
                 var users = (from user in db.Users
                              select new UserView
-                         {
-                             Id = user.Id,
-                             FirstName = user.FirstName,
-                             LastName = user.LastName,
-                             Age = user.Age,
-                             Gender = user.Gender
-                         }).ToList();
-                                             
+                             {
+                                 Id = user.Id,
+                                 FirstName = user.FirstName,
+                                 LastName = user.LastName,
+                                 Age = user.Age,
+                                 Gender = user.Gender
+                             }).ToList();
+
                 return View(users);
             }
-            
+
         }
 
         // GET: Security/Users/Details/5
-        public ActionResult Details(Guid id)
-{
+        public ActionResult Details(int id)
+        {
             return View(GetUser(id));
-            
+
         }
-         
+
         // GET: Security/Users/Create
         public ActionResult Create()
         {
@@ -94,19 +67,19 @@ namespace WMSUCPECS.Areas.Security.Controllers
                     return View();
                 using (var db = new DatabaseContext())
                 {
-                db.Users.Add(new User
-                {
-                    Id = Guid.NewGuid(),
-                    FirstName = usermodel.FirstName,
-                    LastName = usermodel.LastName,
-                    Age = usermodel.Age,
-                    Gender = usermodel.Gender
+                    db.Users.Add(new User
+                    {
+                       // Id = Guid.NewGuid(),
+                        FirstName = usermodel.FirstName,
+                        LastName = usermodel.LastName,
+                        Age = usermodel.Age,
+                        Gender = usermodel.Gender
 
-                });
-                db.SaveChanges();
-            }
+                    });
+                    db.SaveChanges();
+                }
                 TempData["message"] = "Successfully created!";
-                
+
                 return RedirectToAction("Index");
             }
             catch
@@ -116,25 +89,25 @@ namespace WMSUCPECS.Areas.Security.Controllers
         }
 
         // GET: Security/Users/Edit/5
-        public ActionResult Edit(Guid id)
+        public ActionResult Edit(int id)
         {
-             return View(GetUser(id));
-            
+            return View(GetUser(id));
+
         }
 
         // POST: Security/Users/Edit/5
         [HttpPost]
-        public ActionResult Edit(Guid id, UserView usermodel)
+        public ActionResult Edit(int id, UserView usermodel)
         {
-          
+
             try
             {
                 if (ModelState.IsValid == false)
                     return View();
                 using (var db = new DatabaseContext())
                 {
-                  var user = db.Users.FirstOrDefault(u => u.Id == id);
-                    
+                    var user = db.Users.FirstOrDefault(u => u.Id == id);
+
                     user.FirstName = usermodel.FirstName;
                     user.LastName = usermodel.LastName;
                     user.Age = usermodel.Age;
@@ -142,11 +115,11 @@ namespace WMSUCPECS.Areas.Security.Controllers
 
                     db.SaveChanges();
                 }
-                
+
 
 
                 TempData["editmsg"] = "Successfully modified!";
-             
+
                 return RedirectToAction("Index");
             }
             catch
@@ -156,18 +129,18 @@ namespace WMSUCPECS.Areas.Security.Controllers
         }
 
         // GET: Security/Users/Delete/5
-        public ActionResult Delete(Guid id)
+        public ActionResult Delete(int id)
         {
-           return View(GetUser(id));
+            return View(GetUser(id));
         }
 
         // POST: Security/Users/Delete/5
         [HttpPost]
-        public ActionResult Delete(Guid id, FormCollection collection)
+        public ActionResult Delete(int id, FormCollection collection)
         {
             try
             {
-                 using (var db = new DatabaseContext())
+                using (var db = new DatabaseContext())
                 {
                     var user = db.Users.FirstOrDefault(u => u.Id == id);
                     db.Users.Remove(user);
@@ -180,7 +153,7 @@ namespace WMSUCPECS.Areas.Security.Controllers
                 return View();
             }
         }
-		private UserView GetUser(Guid id)
+        private UserView GetUser(int id)
         {
             using (var db = new DatabaseContext())
             {
@@ -195,7 +168,7 @@ namespace WMSUCPECS.Areas.Security.Controllers
                             Gender = user.Gender
                         }).FirstOrDefault();
 
-                
+
             }
 
         }

@@ -8,7 +8,7 @@ namespace WMSUCPECS.Areas.Security.Models
 {
     public class UserView
     {
-        public Guid Id  { get; set; }
+        public int Id  { get; set; }
 
         [Required, Display (Name = "FIRST NAME")]
         [MinLength(2, ErrorMessage = "Minimum of 2 Characters")]
