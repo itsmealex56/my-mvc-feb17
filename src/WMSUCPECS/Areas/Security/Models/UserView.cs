@@ -20,12 +20,12 @@ namespace WMSUCPECS.Areas.Security.Models
         [MaxLength(15, ErrorMessage = "Maximum of 15 Characters")]
         public String LastName { get; set; }
 
-        [Range(1,100)]
+        [Range(1,100), Display (Name= "AGE")]
         public int? Age { get; set; }
 
         public String Gender { get; set; }
 
-        [Display(Name = "Employment Date")]
+        [Display(Name = "EMPLOYMENT DATE")]
         public DateTime? EmploymentDate { get; set; }
 
 
