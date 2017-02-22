@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -24,7 +25,8 @@ namespace WMSUCPECS.Areas.Security.Controllers
                                  FirstName = user.FirstName,
                                  LastName = user.LastName,
                                  Age = user.Age,
-                                 Gender = user.Gender
+                                 Gender = user.Gender,
+                                 EmploymentDate = user.EmploymentDate 
                              }).ToList();
 
                 return View(users);
@@ -67,20 +69,47 @@ namespace WMSUCPECS.Areas.Security.Controllers
                     return View();
                 using (var db = new DatabaseContext())
                 {
-                    db.Users.Add(new User
+                    var sql = @"exec uspCreateUser @guid,
+                                    @fname,
+                                    @lname,
+                                    @age,
+                                    @gender,
+                                    @empDate,
+                                    @school,
+                                    @yrAttended";
+
+                    var result = db.Database.ExecuteSqlCommand(sql,
+                        new SqlParameter("@guid", Guid.NewGuid()),
+                        new SqlParameter("@fname", usermodel.FirstName),
+                        new SqlParameter("@lname", usermodel.LastName),
+                        new SqlParameter("@age", usermodel.Age),
+                        new SqlParameter("@gender", usermodel.Gender),
+                        new SqlParameter("@empDate", DateTime.UtcNow),
+                        new SqlParameter("@school", "WMSU"),
+                        new SqlParameter("@yrAttended", "2002"));
+
+                    /*{
+                        db.Users.Add(new User
+                        {
+                           // Id = Guid.NewGuid(),
+                            FirstName = usermodel.FirstName,
+                            LastName = usermodel.LastName,
+                            Age = usermodel.Age,
+                            Gender = usermodel.Gender,
+                            EmploymentDate = usermodel.EmploymentDate 
+
+                        });
+                        db.SaveChanges();
+                    }*/
+                    if (result > 1)
                     {
-                       // Id = Guid.NewGuid(),
-                        FirstName = usermodel.FirstName,
-                        LastName = usermodel.LastName,
-                        Age = usermodel.Age,
-                        Gender = usermodel.Gender
+                        TempData["message"] = "Successfully created!";
 
-                    });
-                    db.SaveChanges();
+                        return RedirectToAction("Index");
+                    }
+                    else
+                        return View();
                 }
-                TempData["message"] = "Successfully created!";
-
-                return RedirectToAction("Index");
             }
             catch
             {
@@ -112,7 +141,7 @@ namespace WMSUCPECS.Areas.Security.Controllers
                     user.LastName = usermodel.LastName;
                     user.Age = usermodel.Age;
                     user.Gender = usermodel.Gender;
-
+                    user.EmploymentDate = usermodel.EmploymentDate; 
                     db.SaveChanges();
                 }
 
@@ -165,7 +194,8 @@ namespace WMSUCPECS.Areas.Security.Controllers
                             FirstName = user.FirstName,
                             LastName = user.LastName,
                             Age = user.Age,
-                            Gender = user.Gender
+                            Gender = user.Gender,
+                            EmploymentDate = user.EmploymentDate 
                         }).FirstOrDefault();
 
 
