@@ -6,15 +6,7 @@
 }
 
 
-<script src="~/Scripts/jquery-ui-1.10.2.min.js"></script>
-<link href="~/Content/themes/base/all.css" rel="stylesheet" />
-<link href="~/Content/themes/base/accordion.css" rel="stylesheet" />
-<link href="~/Content/demos.css" rel="stylesheet" />
-<script type="text/javascript">
-    $(function () {
-        $("#accordion").accordion();
-    });
-</script>
+
 
 
   
@@ -52,91 +44,157 @@
 </p>
 
 <div style="overflow-x:auto;">
-   
-        <table class="table">
-            <tr>
-                <th>
-                    SN
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.FirstName)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.LastName)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Age)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Gender)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.EmploymentDate)
-                </th>
-                <th>Actions</th>
-            </tr>
-
-
-            @{var x = 1;}
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>
-                        @(x++)
-                    </td>
-                    <td>
-
-                        @Html.DisplayFor(modelItem => item.FirstName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.LastName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Age)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Gender)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.EmploymentDate)
-                    </td>
-                    <td>
-                        <a href="@Url.Action("Edit", new { id=item.Id })"
-                           class="text-success">
-                            <span class="glyphicon glyphicon-pencil"></span>Edit
-                        </a>
-                        <a href="@Url.Action("Details", new { id = item.Id })"
-                           class="text-success">
-                            <span class="glyphicon glyphicon-cloud"></span>Details
-                        </a>
-                        <a href="@Url.Action("Delete", new { id = item.Id })"
-                           class="text-danger">
-                            <span class="glyphicon glyphicon-trash"></span>Delete
-                        </a>
-                    </td>
-                </tr>
-            }
-
+    <table class="table">
+        <tr>
+            <th>
+                SN
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Age)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Gender)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EmploymentDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Educations)
+            </th>
+            <th>Actions</th>
+        </tr>
+                @{var x = 1;}
+                @{var y = 1;}
+                @foreach (var item in Model)
+                {
+        <tr class="accordion-toggle">
+            <td data-toggle="collapse" data-target="#collapse1">@(x++)</td>
+            <td data-toggle="collapse" data-target="#collapse1">@Html.DisplayFor(modelItem => item.FirstName)</td>
+            <td data-toggle="collapse" data-target="#collapse1">@Html.DisplayFor(modelItem => item.LastName)</td>
+            <td data-toggle="collapse" data-target="#collapse1">@Html.DisplayFor(modelItem => item.Age)</td>
+            <td data-toggle="collapse" data-target="#collapse1">@Html.DisplayFor(modelItem => item.Gender)</td>
+            <td data-toggle="collapse" data-target="#collapse1">@Html.DisplayFor(modelItem => item.EmploymentDate)</td>
+            
+        </tr>
+        <tr>
+            <td></td>
+            <td colspan="4">
+                <div id="collapse1" class="collapse in">
+                    - Details 1 <br />
+                    - Details 2 <br />
+                    - Details 3 <br />
+                </div>
+            </td>
+        </tr>
+                }
         </table>
-  
-    <script>
-    var acc = document.getElementsByClassName("accordion");
-    var i;
 
-    for (i = 0; i < acc.length; i++) {
-    acc[i].onclick = function(){
-    /* Toggle between adding and removing the "active" class,
-    to highlight the button that controls the panel */
-    this.classList.toggle("active");
 
-    /* Toggle between hiding and showing the active panel */
-    var panel = this.nextElementSibling;
-    if (panel.style.display === "block") {
-    panel.style.display = "none";
-    } else {
-    panel.style.display = "block";
-    }
-    }
-    }
-    </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        @*<table class="table">
+
+                <tr>
+                    <th>
+                        SN
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.FirstName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.LastName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Age)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Gender)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.EmploymentDate)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.School)
+                    </th>
+                    <th>Actions</th>
+                </tr>
+
+
+                @{var x = 1;}
+                @foreach (var item in Model)
+                {
+
+                    <tr class="accordion-toggle" data-toggle="collapse" data-target="#collapseOne">
+                        <td>
+                            @(x++)
+                        </td>
+                        <td>
+
+                            @Html.DisplayFor(modelItem => item.FirstName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.LastName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Age)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Gender)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.EmploymentDate)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.School)
+                        </td>
+                        <td>
+                            <a href="@Url.Action("Edit", new { id=item.Id })"
+                               class="text-success">
+                                <span class="glyphicon glyphicon-pencil"></span>Edit
+                            </a>
+                            <a href="@Url.Action("Details", new { id = item.Id })"
+                               class="text-success">
+                                <span class="glyphicon glyphicon-cloud"></span>Details
+                            </a>
+                            <a href="@Url.Action("Delete", new { id = item.Id })"
+                               class="text-danger">
+                                <span class="glyphicon glyphicon-trash"></span>Delete
+                            </a>
+                        </td>
+                      </tr>
+
+                }
+
+            </table>*@
+
+
 </div>

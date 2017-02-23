@@ -25,7 +25,7 @@ namespace WMSUCPECS.Areas.Security.Controllers
                                  Age = user.Age,
                                  Gender = user.Gender,
                                  EmploymentDate = user.EmploymentDate,
-                                 Schools = user.Educations.Select(s => s.School).ToList()
+                                // Educations = user.Educations.Select(s => s.School).ToList()
                              }).ToList();
 
                 return View(users);
@@ -74,7 +74,7 @@ namespace WMSUCPECS.Areas.Security.Controllers
                         new SqlParameter("@age", usermodel.Age),
                         new SqlParameter("@gender", usermodel.Gender),
                         new SqlParameter("@empDate", DateTime.UtcNow),
-                        new SqlParameter("@school", "WMSU"),
+                        new SqlParameter("@school", usermodel.Educations),
                         new SqlParameter("@yrAttended", "2002"));
 
                     /*{

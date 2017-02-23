@@ -28,8 +28,8 @@ namespace WMSUCPECS.Areas.Security.Models
         [Display(Name = "EMPLOYMENT DATE")]
         public DateTime? EmploymentDate { get; set; }
 
-
-        public IList<string> Schools { get; set; }
+        [Display(Name = "SCHOOL")]
+        public IList<EducationView> Educations { get; set; }
 
     }
 

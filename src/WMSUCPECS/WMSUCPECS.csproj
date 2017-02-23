@@ -169,6 +169,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Areas\Security\Controllers\UsersController.cs" />
+    <Compile Include="Areas\Security\Models\EducationView.cs" />
     <Compile Include="Areas\Security\Models\UserView.cs" />
     <Compile Include="Areas\Security\SecurityAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
